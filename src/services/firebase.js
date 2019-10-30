@@ -10,6 +10,17 @@ const config = {
   appId: "1:998059230346:web:563971bdaaeb7e3a859973"
 };
 
-const database = firebase.initializeApp(config)
+firebase.initializeApp(config)
 
-export default database;
+const db = firebase.firestore()
+const auth = firebase.auth()
+const currentUser = auth.currentUser
+
+const usersCollection = db.collection('items')
+
+export {
+  db,
+  auth,
+  currentUser,
+  usersCollection,
+}
