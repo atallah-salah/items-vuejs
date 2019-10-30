@@ -10,20 +10,20 @@
     </tr>
   </thead>
   <tbody>
-    <tr v-for="(item,index) in items" v-bind:key="item.id">
+    <tr v-for="(item,index) in items" v-bind:key="item.id" v-on:click="selectItem(index)">
       <th scope="row">{{index}}</th>
       <td>{{item.name}}</td>
       <td>{{item.updated_at}}</td>
       <td>
         <div>
-        <button>Edit</button> 
+        <button v-on:click="selectItem(index)">Edit</button> 
         <button>Delete</button>
         </div>
         </td>
     </tr>
   </tbody>
 </table>
-  <button v-on:click="getAllItems">trhui</button>
+  <button v-on:click="getAllItems">add item</button>
 </div>
 </template>
 
@@ -50,8 +50,10 @@ export default {
           items.push({ id: doc.id, name: doc.data().name ,description:doc.data().description, updated_at:doc.data().updated_at})
         })
         this.items=items;
-        console.log(this.items);
       })
+    },
+    selectItem:function(index){            
+      this.$store.commit('setCurrentItem',this.items[index])
     }
   }
 }
