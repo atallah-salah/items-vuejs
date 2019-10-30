@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Container from '../components/Container';
+import CreateItem from '../components/createItem'
+import UpdateItem from '../components/updateITem'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -8,6 +11,16 @@ const routes = [
     path: '/',
     name: 'container',
     component: Container
+  },
+  {
+    path: '/create',
+    name: 'createItem',
+    component: CreateItem
+  },
+  {
+    path: '/update/:id',
+    name: 'updateItem',
+    component: UpdateItem
   }
 ]
 

@@ -16,14 +16,14 @@
       <td>{{item.updated_at}}</td>
       <td>
         <div>
-        <button v-on:click="selectItem(index)">Edit</button> 
-        <button>Delete</button>
+        <button v-on:click="updateItem(item.id)">Edit</button> 
+        <button  v-on:click="deleteItem(item.id)">Delete</button>
         </div>
         </td>
     </tr>
   </tbody>
 </table>
-  <button v-on:click="getAllItems">add item</button>
+  <button v-on:click="createNewItem">add item</button>
 </div>
 </template>
 
@@ -47,13 +47,25 @@ export default {
       firebase.orderBy('updated_at').onSnapshot((snapshot) => {
         let items = []
         snapshot.forEach((doc) => {
-          items.push({ id: doc.id, name: doc.data().name ,description:doc.data().description, updated_at:doc.data().updated_at})
+          items.push({ id: doc.id, name: doc.data().name ,description:doc.data().description, updated_at:Date(doc.data().updated_at)})
         })
         this.items=items;
       })
     },
     selectItem:function(index){            
       this.$store.commit('setCurrentItem',this.items[index])
+    },
+    deleteItem: function(id) {
+      if (id) {
+        firebase.doc(id).delete().then(function() {
+          console.log('Document successfully deleted')
+        }).catch(function(error) {
+          this.error = error
+        })
+      }
+    },
+    updateItem:function(id){
+      this.$router.push(`/update/${id}`)
     }
   }
 }
