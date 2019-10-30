@@ -30,7 +30,7 @@ export default {
 .items{
   flex-grow: 2.5 !important;
   min-height: 500px;
-  max-height: 750px;
+  max-height: 620px;
   border-radius: 20px 0px 0px 20px;
   padding-top: 10px;
 

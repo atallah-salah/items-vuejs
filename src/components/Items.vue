@@ -1,6 +1,6 @@
 <template>
-<div>
-<table class="table table-striped">
+<div class="table-wrapper">
+<table class="table table-striped ">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -16,7 +16,7 @@
       <td>{{item.updated_at}}</td>
       <td>
         <div class="buttons-container">
-        <button v-on:click="updateItem(item.id)" class="btn btn-info"><i class="fas fa-edit"></i></button> 
+        <button v-on:click="updateItem(item.id,index)" class="btn btn-info"><i class="fas fa-edit"></i></button> 
         <button v-on:click="deleteItem(item.id)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
         </div>
         </td>
@@ -70,7 +70,8 @@ export default {
         })
       }
     },
-    updateItem:function(id){
+    updateItem:function(id,index){
+      this.$store.commit('setCurrentItem',this.items[index])
       this.$router.push(`/update/${id}`)
     }
   }
@@ -100,5 +101,8 @@ export default {
 }
 .row-item:hover{
   background-color: rgba(127, 255, 212, 0.534);
+}
+.table-wrapper{
+overflow: auto;
 }
 </style>

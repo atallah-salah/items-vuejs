@@ -1,22 +1,25 @@
 <template>
-<form id="app" v-on:submit.prevent="create" method="post">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Create</h5>
+      <form id="app" v-on:submit.prevent="create" method="post">
+        <div class="form-group">
+          <label for="name">Title</label>
+          <input class="form-control" id="name" v-model="name" type="text" name="name" required placeholder="Enter title">
+        </div>
 
-  <p>
-    <label for="name">Title</label>
-    <input id="name" v-model="name" type="text" name="name" required>
-  </p>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" v-model="description" type="text" name="description" placeholder="Description..."></textarea>
+        </div>
 
-  <p>
-    <label for="description">Description</label>
-    <input id="description" v-model="description" type="text" name="description">
-  </p>
-
-  <p>
-    <input type="submit" value="Submit">
-    <button v-on:click="$router.push('/')">cancel</button>
-  </p>
-
-</form>
+        <div class="form-group button-group">
+          <button class="btn btn-danger" v-on:click="$router.push('/')">cancel</button>
+          <input class="btn btn-info" type="submit" value="Submit">
+        </div>
+      </form>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -49,4 +52,27 @@ export default {
 }
 </script>
 <style scoped>
+form{
+  flex-direction: column;
+}
+.form-group{
+  width: 80%;
+}
+.card-title{
+    background-color: #00f7c640;
+    padding: 22px;
+    text-align: center;
+    font-size: 28px;
+}
+.card-body{
+  width:360px;
+}
+.button-group{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.button-group .btn{
+  width: 44%;
+}
 </style>
