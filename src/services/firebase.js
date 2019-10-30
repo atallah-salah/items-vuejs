@@ -13,14 +13,6 @@ const config = {
 firebase.initializeApp(config)
 
 const db = firebase.firestore()
-const auth = firebase.auth()
-const currentUser = auth.currentUser
+const itemsCollection = db.collection('items')
 
-const usersCollection = db.collection('items')
-
-export {
-  db,
-  auth,
-  currentUser,
-  usersCollection,
-}
+export default itemsCollection

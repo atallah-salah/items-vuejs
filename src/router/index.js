@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Items from '../components/Items';
+import Container from '../components/Container';
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'items',
-    component: Items
+    name: 'container',
+    component: Container
   }
 ]
 
