@@ -1,3 +1,4 @@
+
 <template>
   <div id="app">
     <router-view/>
@@ -7,6 +8,9 @@
 <style>
   html,body{
     height: 100%;
+  }
+  body{
+    background: linear-gradient(45deg, #00ff6f, #00f2ff);
   }
   #app{
     display: flex;

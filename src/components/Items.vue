@@ -10,20 +10,20 @@
     </tr>
   </thead>
   <tbody>
-    <tr v-for="(item,index) in items" v-bind:key="item.id" v-on:click="selectItem(index)">
-      <th scope="row">{{index}}</th>
-      <td>{{item.name}}</td>
+    <tr class="row-item" v-for="(item,index) in items" v-bind:key="item.id" v-on:click="selectItem(index)">
+      <th scope="row">{{index+1}}</th>
+      <td style="max-width:300px;">{{item.name}}</td>
       <td>{{item.updated_at}}</td>
       <td>
-        <div>
-        <button v-on:click="updateItem(item.id)">Edit</button> 
-        <button  v-on:click="deleteItem(item.id)">Delete</button>
+        <div class="buttons-container">
+        <button v-on:click="updateItem(item.id)" class="btn btn-info"><i class="fas fa-edit"></i></button> 
+        <button v-on:click="deleteItem(item.id)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
         </div>
         </td>
     </tr>
   </tbody>
 </table>
-  <button v-on:click="createNewItem">add item</button>
+  <button v-on:click="createNewItem" class="btn btn-info add-new btn-lg btn-circle "><i class="fas fa-plus"></i></button>
 </div>
 </template>
 
@@ -47,7 +47,13 @@ export default {
       firebase.orderBy('updated_at').onSnapshot((snapshot) => {
         let items = []
         snapshot.forEach((doc) => {
-          items.push({ id: doc.id, name: doc.data().name ,description:doc.data().description, updated_at:Date(doc.data().updated_at)})
+          let dateTime = new Date(doc.data().updated_at)
+          items.push({
+              id: doc.id,
+              name: doc.data().name,
+              description:doc.data().description,
+              updated_at:dateTime.getFullYear()+'-'+(dateTime.getMonth()+1)+'-'+dateTime.getDate() +' / '+dateTime.getHours() + ":" + dateTime.getMinutes()
+          })
         })
         this.items=items;
       })
@@ -71,5 +77,28 @@ export default {
 }
 </script>
 <style scoped>
-
+.table td, .table th{
+  border-top: unset;
+  text-align: center;
+}
+.buttons-container{
+  display: flex;
+  justify-content: space-evenly;
+}
+.add-new{
+  position: absolute;
+  left: 4%;
+  bottom: 4%;
+  background-color: #3dbb9f;
+}
+.btn-circle {
+  width: 50px; 
+  height: 50px; 
+  padding: 7px 10px; 
+  border-radius: 25px; 
+  text-align: center; 
+}
+.row-item:hover{
+  background-color: rgba(127, 255, 212, 0.534);
+}
 </style>
